@@ -327,12 +327,18 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZ4-VN-lkG">
-                                <rect key="frame" x="282" y="486" width="37" height="30"/>
+                                <rect key="frame" x="282" y="527" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneButtonAction:" destination="cEb-tw-9Yc" eventType="touchUpInside" id="GNy-7H-lB2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aC-VK-kKk">
+                                <rect key="frame" x="174" y="475" width="253" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -365,6 +371,7 @@
                         <outlet property="itemsQuestion" destination="hRF-Sw-Npd" id="LWN-sU-eqV"/>
                         <outlet property="numberOfItemsShared" destination="DZ7-sx-yia" id="uxH-5n-uni"/>
                         <outlet property="sharedItemsSegmentedControl" destination="eWH-Q9-vGy" id="geq-Br-snz"/>
+                        <outlet property="totalLabel" destination="5aC-VK-kKk" id="UYd-U5-8Hw"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="nextScreen" id="N25-aS-Lpf"/>
                     </connections>
                 </viewController>
@@ -796,6 +803,12 @@
                                     <action selector="newEntryButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cbI-eh-9NY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7Y-wI-gRz">
+                                <rect key="frame" x="306" y="484" width="63" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215690000001" green="0.1215686275" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -844,6 +857,7 @@
                         <outlet property="item8Label" destination="dU1-Kc-JRh" id="i6q-92-f0g"/>
                         <outlet property="newEntryButtonOutlet" destination="vRF-aT-uYE" id="AbH-nx-AJf"/>
                         <outlet property="segmentedControl" destination="WoF-fa-VVE" id="xnj-Li-mF3"/>
+                        <outlet property="segueLabel" destination="H7Y-wI-gRz" id="Jbu-HA-HXc"/>
                         <outlet property="totalBill" destination="F91-3l-BBZ" id="uuI-gD-eQP"/>
                         <outlet property="totalTaxLabel" destination="lXf-3K-ZiS" id="40h-5c-Is1"/>
                         <outlet property="totalTaxResultLabel" destination="ca1-Jn-bRR" id="L21-tj-0g7"/>

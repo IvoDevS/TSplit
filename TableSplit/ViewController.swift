@@ -13,7 +13,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func shouldAutorotate() -> Bool {
         return false
     }
+    
+    var totalShared : Double?
 
+    @IBOutlet weak var segueLabel: UILabel!
     @IBOutlet weak var grandTotalLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var newEntryButtonOutlet: UIButton!
@@ -225,7 +228,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -329,6 +331,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //totalShared = totalSharedSum
+        
+        segueLabel.text = String(totalShared!)
+        
+        print(totalShared)
+        
         segmentedControl.selectedSegmentIndex = -1
         
         item1.hidden = true
@@ -340,7 +348,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         item7.hidden = true
         item8.hidden = true
 
-        
         item1Label.hidden = true
         item2Label.hidden = true
         item3Label.hidden = true
@@ -410,8 +417,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         newEntryButtonOutlet.hidden = true
         
-//        oldSegmentedIndex = -1
-//        actualSegmentedIndex = segmentedControl.selectedSegmentIndex
         segmentedControl.selectedSegmentIndex = -1
         
         isPressed = false

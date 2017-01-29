@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SharedItemsViewController: UIViewController {
+class SharedItemsViewController: UIViewController, UITextFieldDelegate{
     
 //Outlets
     
@@ -22,6 +22,8 @@ class SharedItemsViewController: UIViewController {
     @IBOutlet weak var item6: UILabel!
     @IBOutlet weak var item7: UILabel!
     @IBOutlet weak var item8: UILabel!
+
+    @IBOutlet weak var totalLabel: UILabel!
     
     //item amount text fields
     
@@ -49,6 +51,8 @@ class SharedItemsViewController: UIViewController {
     
     var oldSegmentedIndex : Int = 0
     var actualSegmentedIndex: Int = 0
+    
+    var totalSum : Double = 0.0
     
     //setting up Arrays for later
     
@@ -132,22 +136,31 @@ class SharedItemsViewController: UIViewController {
     
     @IBAction func doneButtonAction(sender: AnyObject) {
         
-        //let item1Price = Double(itemAmount1.text!)!/Double(itemShared1.text!)! ?? 0.0
+        let total1 = (Double(itemAmount1.text!) ?? 0.0)/(Double(itemShared1.text!) ?? 1.0)
         
-        print(item1Price)
+        let total2 = (Double(itemAmount2.text!) ?? 0.0)/(Double(itemShared2.text!) ?? 1.0)
         
-        let item2Price = Double(itemAmount2.text!) ?? 0.0
-        let item3Price = Double(itemAmount2.text!) ?? 0.0
+        let total3 = (Double(itemAmount3.text!) ?? 0.0)/(Double(itemShared3.text!) ?? 1.0)
         
+        let total4 = (Double(itemAmount4.text!) ?? 0.0)/(Double(itemShared4.text!) ?? 1.0)
         
+        let total5 = (Double(itemAmount5.text!) ?? 0.0)/(Double(itemShared5.text!) ?? 1.0)
         
+        let total6 = (Double(itemAmount6.text!) ?? 0.0)/(Double(itemShared6.text!) ?? 1.0)
+        
+        let total7 = (Double(itemAmount7.text!) ?? 0.0)/(Double(itemShared7.text!) ?? 1.0)
+        
+        let total8 = (Double(itemAmount8.text!) ?? 0.0)/(Double(itemShared8.text!) ?? 1.0)
+        
+        totalSum = total1 + total2 + total3 + total4 + total5 + total6 + total7 + total8
+        
+        //print(totalSum)
+        
+        totalLabel.text = String(totalSum)
         
         performSegueWithIdentifier("nextScreen", sender: self)
         
-        
-        
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,12 +202,22 @@ class SharedItemsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var secondScene = segue.destinationViewController as! ViewController
+        
+        secondScene.totalShared = totalSum
+        
+        print(totalSum)
+        
+    }
+
 
     /*
     // MARK: - Navigation
