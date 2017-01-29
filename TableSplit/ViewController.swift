@@ -26,6 +26,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var labelArray = [UILabel]()
     var anotherLableArray = [UILabel]()
     var labelArrayToShow = [UILabel]()
+    
     var newNumber = 0
     var currentIndex = 0
     var prevIndex = 0
@@ -88,6 +89,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        currentIndex = segmentedControl.selectedSegmentIndex
         print(sender.debugDescription)
         print(segmentedControl.debugDescription)
+        
         oldSegmentedIndex = actualSegmentedIndex
         actualSegmentedIndex = segmentedControl.selectedSegmentIndex;
         
@@ -136,9 +138,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        }
         
         textArray = [item1,item2,item3,item4,item5,item6,item7,item8]
+        
         labelArray = [item1Label, item2Label, item3Label, item4Label, item5Label, item6Label, item7Label, item8Label]
-        
-        
         
         print("not yet")
         print(oldSegmentedIndex)
@@ -162,193 +163,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 label.hidden = true
             }
         }
-        
-    
-        
-        /*switch segmentedControl.selectedSegmentIndex {
-        
-        case 0 :
-            item1.hidden = false
-            item2.hidden = true
-            item3.hidden = true
-            item4.hidden = true
-            item5.hidden = true
-            item6.hidden = true
-            item7.hidden = true
-            item8.hidden = true
-
-            
-            item1Label.hidden = false
-            item2Label.hidden = true
-            item3Label.hidden = true
-            item4Label.hidden = true
-            item5Label.hidden = true
-            item6Label.hidden = true
-            item7Label.hidden = true
-            item8Label.hidden = true
-
-            
-        case 1 :
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = true
-                        item4.hidden = true
-                        item5.hidden = true
-                        item6.hidden = true
-                        item7.hidden = true
-                        item8.hidden = true
-
-            
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = true
-                        item4Label.hidden = true
-                        item5Label.hidden = true
-                        item6Label.hidden = true
-                        item7Label.hidden = true
-
-            
-                    case 2 :
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = false
-                        item4.hidden = true
-                        item5.hidden = true
-                        item6.hidden = true
-                        item7.hidden = true
-                        item8.hidden = true
-
-            
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = false
-                        item4Label.hidden = true
-                        item5Label.hidden = true
-                        item6Label.hidden = true
-                        item7Label.hidden = true
-                        item8Label.hidden = true
-
-            
-                    case 3 :
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = false
-                        item4.hidden = false
-                        item5.hidden = true
-                        item6.hidden = true
-                        item7.hidden = true
-                        item8.hidden = true
-
-            
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = false
-                        item4Label.hidden = false
-                        item5Label.hidden = true
-                        item6Label.hidden = true
-                        item7Label.hidden = true
-                        item8Label.hidden = true
-
-
-            
-                    case 4 :
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = false
-                        item4.hidden = false
-                        item5.hidden = false
-                        item6.hidden = true
-                        item7.hidden = true
-                        item8.hidden = true
-
-            
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = false
-                        item4Label.hidden = false
-                        item5Label.hidden = false
-                        item6Label.hidden = true
-                        item7Label.hidden = true
-                        item8Label.hidden = true
-
-            
-                    case 5:
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = false
-                        item4.hidden = false
-                        item5.hidden = false
-                        item6.hidden = false
-                        item7.hidden = true
-                        item8.hidden = true
-
-            
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = false
-                        item4Label.hidden = false
-                        item5Label.hidden = false
-                        item6Label.hidden = false
-                        item7Label.hidden = true
-                        item8Label.hidden = true
-
-            
-                    case 6:
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = false
-                        item4.hidden = false
-                        item5.hidden = false
-                        item6.hidden = false
-                        item7.hidden = false
-                        item8.hidden = true
-
-                        
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = false
-                        item4Label.hidden = false
-                        item5Label.hidden = false
-                        item6Label.hidden = false
-                        item7Label.hidden = false
-                        item8Label.hidden = true
-
-                        
-                    case 7:
-                        item1.hidden = false
-                        item2.hidden = false
-                        item3.hidden = false
-                        item4.hidden = false
-                        item5.hidden = false
-                        item6.hidden = false
-                        item7.hidden = false
-                        item8.hidden = false
-
-                        
-                        item1Label.hidden = false
-                        item2Label.hidden = false
-                        item3Label.hidden = false
-                        item4Label.hidden = false
-                        item5Label.hidden = false
-                        item6Label.hidden = false
-                        item7Label.hidden = false
-                        item8Label.hidden = false
-
-
-            
-            
-                    default :
-                        break
-                    }
-*/
 
     }
 
 
     
     @IBAction func calculateTotal(sender: AnyObject) {
-        
-        
         
         var total = Double(totalBill.text!) ?? 0.0
         
@@ -593,6 +413,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        oldSegmentedIndex = -1
 //        actualSegmentedIndex = segmentedControl.selectedSegmentIndex
         segmentedControl.selectedSegmentIndex = -1
+        
         isPressed = false
     }
 
