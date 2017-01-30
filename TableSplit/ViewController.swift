@@ -52,6 +52,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var yourDueLabel: UILabel!
     @IBOutlet weak var yourDueResultLabel: UILabel!
     
+    @IBOutlet weak var taxCostLabel: UILabel!
+    @IBOutlet weak var taxCostTotal: UITextField!
     
     //Item Labels
     
@@ -81,10 +83,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var totalBill: UITextField!
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
-        
-        whatsTotalLabel.hidden = false
-        totalBill.hidden = false
-        howMuchButton.hidden = false
+
         
         //USING A DICTIONARY
         
@@ -168,35 +167,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
 
     }
-
-
     
     @IBAction func calculateTotal(sender: AnyObject) {
         
-        var total = Double(totalBill.text!) ?? 0.0
+        let taxPercent = Double(taxCostTotal.text!) ?? 0.0
         
-        var amount1 = Double(item1.text!) ?? 0.0
-        var amount2 = Double(item2.text!) ?? 0.0
-        var amount3 = Double(item3.text!) ?? 0.0
-        var amount4 = Double(item4.text!) ?? 0.0
-        var amount5 = Double(item5.text!) ?? 0.0
-        var amount6 = Double(item6.text!) ?? 0.0
-        var amount7 = Double(item7.text!) ?? 0.0
-        var amount8 = Double(item8.text!) ?? 0.0
+        let total = Double(totalBill.text!) ?? 0.0
         
-        var sum = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8
+        let sharedTotal = totalShared ?? 0.0
         
-        var tax = total * 0.08875
+        let amount1 = Double(item1.text!) ?? 0.0
+        let amount2 = Double(item2.text!) ?? 0.0
+        let amount3 = Double(item3.text!) ?? 0.0
+        let amount4 = Double(item4.text!) ?? 0.0
+        let amount5 = Double(item5.text!) ?? 0.0
+        let amount6 = Double(item6.text!) ?? 0.0
+        let amount7 = Double(item7.text!) ?? 0.0
+        let amount8 = Double(item8.text!) ?? 0.0
         
-        var tip = total * 0.20
+        let sum = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8 + sharedTotal
         
-        var percentOfTotal = sum/total
+        let tax = total * taxPercent
         
-        var taxOwed = tax * percentOfTotal
+        let tip = total * 0.20
         
-        var tipOwed = tip * percentOfTotal
+        let percentOfTotal = sum/total
         
-        var grandTotalOwed = sum + taxOwed + tipOwed
+        let taxOwed = tax * percentOfTotal
+        
+        let tipOwed = tip * percentOfTotal
+        
+        let grandTotalOwed = sum + taxOwed + tipOwed
         
         totalTaxResultLabel.text = "$ " + "\(String(format:"%.2f", tax))"
         yourTaxDueResultLabel.text = "$ " + "\(String(format: "%.2f",taxOwed))"
@@ -235,43 +236,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         switch textField {
         case item1:
+            
+            
             item1.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 0 {
                 item2.becomeFirstResponder()
-            }
-//            else {
-//                totalBill.becomeFirstResponder()
-//            }
+            } else {
+            totalBill.becomeFirstResponder()
+            whatsTotalLabel.hidden = false
+            totalBill.hidden = false
+           }
         case item2:
-            item2.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 1 {
                 item3.becomeFirstResponder()
+            } else {
+                whatsTotalLabel.hidden = false
+                totalBill.hidden = false
+                totalBill.becomeFirstResponder()
             }
-//            else {
-//                totalBill.becomeFirstResponder()
-//            }
         case item3:
             item3.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 2 {
                 item4.becomeFirstResponder()
+            }else {
+               totalBill.becomeFirstResponder()
+                whatsTotalLabel.hidden = false
+                totalBill.hidden = false
             }
-//            else {
-//                totalBill.becomeFirstResponder()
-//            }
         case item4:
             item4.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 3 {
                 item5.becomeFirstResponder()
+            } else {
+                totalBill.becomeFirstResponder()
+                whatsTotalLabel.hidden = false
+                totalBill.hidden = false
             }
-//            else {
-//                totalBill.becomeFirstResponder()
-//            }
         case item5:
             item5.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 4 {
                 item6.becomeFirstResponder()
             } else {
                 totalBill.becomeFirstResponder()
+                whatsTotalLabel.hidden = false
+                totalBill.hidden = false
             }
         case item6:
             item6.resignFirstResponder()
@@ -279,6 +287,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 item6.becomeFirstResponder()
             } else {
                 totalBill.becomeFirstResponder()
+                whatsTotalLabel.hidden = false
+                totalBill.hidden = false
             }
         case item7:
             item7.resignFirstResponder()
@@ -286,10 +296,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 item8.becomeFirstResponder()
             } else {
                 totalBill.becomeFirstResponder()
+                whatsTotalLabel.hidden = false
+                totalBill.hidden = false
             }
         case item8:
             item8.resignFirstResponder()
             totalBill.becomeFirstResponder()
+            whatsTotalLabel.hidden = false
+            totalBill.hidden = false
+            
+        case totalBill:
+            
+            let total = Double(totalBill.text!) ?? 0.0
+            
+            if total != 0.0 {
+                
+            print(totalBill)
+            totalBill.resignFirstResponder()
+            taxCostLabel.hidden = false
+            taxCostTotal.hidden = false
+            taxCostTotal.becomeFirstResponder()
+                
+            } else {
+                
+                let alert = UIAlertController(title: "Missing Information", message: "Please enter the bill total wihout tax", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                totalBill.becomeFirstResponder()
+            }
+                
         default :
             break
         }
@@ -311,12 +347,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         
         if textField == totalBill || textField == segmentedControl.selectedSegmentIndex {
-            let item = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
+            let item = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
             let toolbarButtons = [item]
             toolbar.setItems(toolbarButtons, animated: true)
             textField.inputAccessoryView = toolbar
             
         } else {
+            
         let item = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
             let toolbarButtons = [item]
             toolbar.setItems(toolbarButtons, animated: true)
@@ -370,6 +407,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         totalTaxResultLabel.hidden = true
         yourTaxDueLabel.hidden = true
         grandTotalLabel.hidden = true
+        
+        taxCostLabel.hidden = true
+        taxCostTotal.hidden = true
         
         item1.delegate = self
         item2.delegate = self

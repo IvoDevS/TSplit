@@ -78,7 +78,8 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
             numberOfItemsShared.hidden = false
             itemsQuestion.hidden = false
         
-        case 1 :performSegueWithIdentifier("nextScreen", sender: self)
+        case 1 :
+            performSegueWithIdentifier("nextScreen", sender: self)
             
         default :
             break;
