@@ -60,6 +60,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sharedItem7: UILabel!
     @IBOutlet weak var sharedItem8: UILabel!
     
+    @IBOutlet weak var sharedItemAmount1: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount2: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount3: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount4: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount5: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount6: UITextField!
+    
     
     //Individual items
     

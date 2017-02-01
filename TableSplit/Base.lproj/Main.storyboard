@@ -1146,6 +1146,12 @@
                         <outlet property="sharedItem6" destination="ap2-7D-QEo" id="xN1-7q-s2q"/>
                         <outlet property="sharedItem7" destination="jrJ-Ed-bup" id="Qpy-qV-TFR"/>
                         <outlet property="sharedItem8" destination="xg7-W8-4Mx" id="5E4-VN-pa0"/>
+                        <outlet property="sharedItemAmount1" destination="3Jq-lR-J3g" id="FdM-bI-nuX"/>
+                        <outlet property="sharedItemAmount2" destination="Lya-iN-GHg" id="IER-Qg-ljJ"/>
+                        <outlet property="sharedItemAmount3" destination="itX-UB-hBx" id="lPF-DC-DMm"/>
+                        <outlet property="sharedItemAmount4" destination="wh3-9V-6ia" id="ONu-nq-MdM"/>
+                        <outlet property="sharedItemAmount5" destination="dSb-NY-z45" id="bEP-kk-raf"/>
+                        <outlet property="sharedItemAmount6" destination="8kT-O6-MHY" id="O2a-lA-1f7"/>
                         <outlet property="sharingYesorNo" destination="DQM-5I-fup" id="LwI-JK-vxn"/>
                         <outlet property="taxCostLabel" destination="AOc-OX-eA5" id="6yi-yp-Y2D"/>
                         <outlet property="taxCostTotal" destination="CrZ-LI-k8g" id="wic-rS-cpz"/>
