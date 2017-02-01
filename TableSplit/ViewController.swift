@@ -41,6 +41,32 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //Outlets
     
+    //Sharing
+    
+    @IBOutlet weak var sharingYesorNo: UISegmentedControl!
+    
+    
+    @IBOutlet weak var itemsSharedQuestionLabel: UILabel!
+    @IBOutlet weak var itemsSharedSegmentedControl: UISegmentedControl!
+    
+    //Shared item # outlets
+    
+    @IBOutlet weak var sharedItem1: UILabel!
+    @IBOutlet weak var sharedItem2: UILabel!
+    @IBOutlet weak var sharedItem3: UILabel!
+    @IBOutlet weak var sharedItem4: UILabel!
+    @IBOutlet weak var sharedItem5: UILabel!
+    @IBOutlet weak var sharedItem6: UILabel!
+    @IBOutlet weak var sharedItem7: UILabel!
+    @IBOutlet weak var sharedItem8: UILabel!
+    
+    
+    //Individual items
+    
+    @IBOutlet weak var individualItemQuestion: UILabel!
+    @IBOutlet weak var individualItemSegmentedControl: UISegmentedControl!
+    
+    
     @IBOutlet weak var whatsTotalLabel: UILabel!
     @IBOutlet weak var howMuchButton: UIButton!
     @IBOutlet weak var totalTaxLabel: UILabel!
@@ -66,7 +92,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var item7Label: UILabel!
     @IBOutlet weak var item8Label: UILabel!
 
-
     //Item Text Fields
     
     @IBOutlet weak var item1: UITextField!
@@ -81,6 +106,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //other labels and textfieds to hide
     
     @IBOutlet weak var totalBill: UITextField!
+    
+    @IBAction func sharingQuestionSegmentedControl(sender: AnyObject) {
+    
+        switch sharingYesorNo.selectedSegmentIndex {
+            
+        case 0:
+            
+            itemsSharedQuestionLabel.hidden = false
+            itemsSharedSegmentedControl.hidden = false
+            individualItemQuestion.hidden = true
+            segmentedControl.hidden = true
+            
+        case 1:
+            
+            individualItemQuestion.hidden = false
+            segmentedControl.hidden = false
+            itemsSharedQuestionLabel.hidden = true
+            itemsSharedSegmentedControl.hidden = true
+            
+        default:
+            break
+            
+        }
+        
+    }
+    
+    
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
 
@@ -98,6 +150,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         tempNumber = segmentedControl.selectedSegmentIndex
         
 
+    //Sharing segmented control
+        
+        
+        
         
 //        var toCompare = Int(tempNumLabel.text!
         
@@ -374,7 +430,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         print(totalShared)
         
+        sharingYesorNo.selectedSegmentIndex = -1
+        
+        individualItemSegmentedControl.hidden = true
+        individualItemQuestion.hidden = true
+        
         segmentedControl.selectedSegmentIndex = -1
+        
+        itemsSharedQuestionLabel.hidden = true
+        itemsSharedSegmentedControl.hidden = true
         
         item1.hidden = true
         item2.hidden = true
