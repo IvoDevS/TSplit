@@ -21,12 +21,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var newEntryButtonOutlet: UIButton!
     
+    var tipPercent: Double = 0
+    
     var oldSegmentedIndex : Int = 0
     var actualSegmentedIndex : Int = 0
     var oldSegmentedSharedIndex : Int = 0
     var actualSegmentedSharedIndex : Int = 0
 
-    
     var textArray = [UITextField]()
     var labelArray = [UILabel]()
     var anotherLableArray = [UILabel]()
@@ -51,7 +52,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var sharingYesorNo: UISegmentedControl!
     
-    
     @IBOutlet weak var itemsSharedQuestionLabel: UILabel!
     @IBOutlet weak var itemsSharedSegmentedControl: UISegmentedControl!
     
@@ -69,42 +69,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //shared item amount Text Fields
     
     @IBOutlet weak var sharedItemAmount1: UITextField!
-    
     @IBOutlet weak var sharedItemAmount2: UITextField!
-    
     @IBOutlet weak var sharedItemAmount3: UITextField!
-    
     @IBOutlet weak var sharedItemAmount4: UITextField!
-    
     @IBOutlet weak var sharedItemAmount5: UITextField!
-    
     @IBOutlet weak var sharedItemAmount6: UITextField!
-    
     @IBOutlet weak var sharedItemAmount7: UITextField!
-    
     @IBOutlet weak var sharedItemAmount8: UITextField!
     
     //shared Item People
     
     @IBOutlet weak var sharedItemPeople1: UITextField!
-    
     @IBOutlet weak var sharedItemPeople2: UITextField!
-    
     @IBOutlet weak var sharedItemPeople3: UITextField!
-    
     @IBOutlet weak var sharedItemPeople4: UITextField!
-    
     @IBOutlet weak var sharedItemPeople5: UITextField!
-    
     @IBOutlet weak var sharedItemPeople6: UITextField!
-    
     @IBOutlet weak var sharedItemPeople7: UITextField!
-    
     @IBOutlet weak var sharedItemPeople8: UITextField!
-    
-    
-    
-    
     
     //Individual items
     
@@ -148,6 +130,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var item7: UITextField!
     @IBOutlet weak var item8: UITextField!
     
+    //Tip Label and segemented control outlets
+    
+    @IBOutlet weak var tipQuestion: UILabel!
+    @IBOutlet weak var tipSelection: UISegmentedControl!
+    
+    
     //other labels and textfieds to hide
     
     @IBOutlet weak var totalBill: UITextField!
@@ -170,6 +158,27 @@ class ViewController: UIViewController, UITextFieldDelegate {
             itemsSharedQuestionLabel.hidden = true
             itemsSharedSegmentedControl.hidden = true
             
+            itemsSharedSegmentedControl.selectedSegmentIndex = -1
+            
+            sharedItemArray = [sharedItem1, sharedItem2, sharedItem3,sharedItem4,sharedItem5,sharedItem6,sharedItem7,sharedItem8]
+            
+            for label in sharedItemArray {
+                label.hidden = true
+            }
+            
+            sharedItemAmount = [sharedItemAmount1,sharedItemAmount2,sharedItemAmount3,sharedItemAmount4,sharedItemAmount5,sharedItemAmount6,sharedItemAmount7,sharedItemAmount8]
+            
+            for text in sharedItemAmount {
+                text.hidden = true
+            }
+            
+            sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
+            
+            for shared in sharedItemPeople {
+                shared.hidden = true
+            }
+
+            
         default:
             break
             
@@ -186,7 +195,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         actualSegmentedSharedIndex = itemsSharedSegmentedControl.selectedSegmentIndex
         
-        
         sharedItemArray = [sharedItem1, sharedItem2, sharedItem3,sharedItem4,sharedItem5,sharedItem6,sharedItem7,sharedItem8]
         
         
@@ -196,6 +204,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
         
         if actualSegmentedSharedIndex >= oldSegmentedSharedIndex {
+            
+            sharedItemAmount1.becomeFirstResponder()
             
             for label in sharedItemArray[0...actualSegmentedSharedIndex] {
                 label.hidden = false
@@ -218,9 +228,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 shared.hidden = true
             }
         }
-        
     }
-    
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
 
@@ -294,6 +302,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         if actualSegmentedIndex >= oldSegmentedIndex {
             
+            item1.becomeFirstResponder()
+            
             for text in textArray[0...actualSegmentedIndex] {
             text.hidden = false
             }
@@ -312,9 +322,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    @IBAction func tipSelectionSegmentedControl(sender: AnyObject) {
+        
+        switch tipSelection.selectedSegmentIndex {
+        case 0:
+            tipPercent = 0
+            howMuchButton.hidden=false
+            
+        case 1:
+            tipPercent = 0.15
+            howMuchButton.hidden = false
+            
+        case 2:
+            tipPercent = 0.18
+            howMuchButton.hidden=false
+            
+        case 3:
+            tipPercent = 0.20
+            howMuchButton.hidden = false
+            
+        default:
+            break
+        }
+        
+    }
+    
+    
+    
     @IBAction func calculateTotal(sender: AnyObject) {
         
-        //calculate shared
+        //calculate total shared
         
         let totalShared1 = (Double(sharedItemAmount1.text!) ?? 0.0)/(Double(sharedItemPeople1.text!) ?? 1.0)
         let totalShared2 = (Double(sharedItemAmount2.text!) ?? 0.0)/(Double(sharedItemPeople2.text!) ?? 1.0)
@@ -326,8 +363,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let totalShared8 = (Double(sharedItemAmount8.text!) ?? 0.0)/(Double(sharedItemPeople8.text!) ?? 1.0)
         
         let totalShared = totalShared1 + totalShared2 + totalShared3 + totalShared4 + totalShared5 + totalShared6 + totalShared7 + totalShared8
-        
-        let taxTotal = Double(taxCostTotal.text!) ?? 0.0
         
         let total = Double(totalBill.text!) ?? 0.0
         
@@ -341,6 +376,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let amount8 = Double(item8.text!) ?? 0.0
         
         let sum = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8 + totalShared
+        
+        //calculate Tax
+        
+        let taxTotal = Double(taxCostTotal.text!) ?? 0.0
         
         let taxPercent = taxTotal/total
         
@@ -482,6 +521,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 totalBill.becomeFirstResponder()
             }
+            
+        case taxCostTotal :
+            
+            let taxCost = Double(taxCostTotal.text!) ?? 0.0
+            
+            if taxCost != 0.0 {
+                taxCostTotal.resignFirstResponder()
+                tipQuestion.hidden = false
+                tipSelection.hidden = false
+                
+            } else {
+                    
+                    let alert = UIAlertController(title: "Missing Information", message: "Please enter the tax", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    totalBill.becomeFirstResponder()
+                }
                 
         default :
             break
@@ -503,15 +560,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         toolbar.translucent = true
         
         
-        if textField == totalBill || textField == segmentedControl.selectedSegmentIndex {
-            let item = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
+        if textField == totalBill  {
+            let item = UIBarButtonItem(title: "Pee", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
             let toolbarButtons = [item]
             toolbar.setItems(toolbarButtons, animated: true)
             textField.inputAccessoryView = toolbar
             
         } else {
             
-        let item = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
+        let item = UIBarButtonItem(title: "Poop", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
             let toolbarButtons = [item]
             toolbar.setItems(toolbarButtons, animated: true)
             textField.inputAccessoryView = toolbar
@@ -529,7 +586,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         itemsSharedSegmentedControl.selectedSegmentIndex = -1
         
-        segueLabel.text = String(totalShared!)
+        tipQuestion.hidden = true
+        tipSelection.hidden = true
+        
+        //segueLabel.text = String(totalShared!)
         
         print(totalShared)
         
@@ -595,6 +655,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         taxCostLabel.hidden = true
         taxCostTotal.hidden = true
+        
+        sharedItemAmount1.delegate = self
+        
+        taxCostTotal.delegate = self
         
         item1.delegate = self
         item2.delegate = self
