@@ -846,6 +846,9 @@
                                     <segment title="8"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="sharedSelection:" destination="BYZ-38-t0r" eventType="valueChanged" id="eMC-dR-Kfr"/>
+                                </connections>
                             </segmentedControl>
                             <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Sgf-cL-mcr">
                                 <rect key="frame" x="129" y="209" width="341" height="240"/>
@@ -1152,6 +1155,16 @@
                         <outlet property="sharedItemAmount4" destination="wh3-9V-6ia" id="ONu-nq-MdM"/>
                         <outlet property="sharedItemAmount5" destination="dSb-NY-z45" id="bEP-kk-raf"/>
                         <outlet property="sharedItemAmount6" destination="8kT-O6-MHY" id="O2a-lA-1f7"/>
+                        <outlet property="sharedItemAmount7" destination="7gf-4Q-aZC" id="GQn-md-rXR"/>
+                        <outlet property="sharedItemAmount8" destination="qNU-68-ulF" id="G6o-hD-sFq"/>
+                        <outlet property="sharedItemPeople1" destination="1WP-Ap-TW1" id="vwQ-pK-hks"/>
+                        <outlet property="sharedItemPeople2" destination="LMv-Zv-lfv" id="GjH-Ki-mFC"/>
+                        <outlet property="sharedItemPeople3" destination="ZD2-qG-GPu" id="btU-4w-dkB"/>
+                        <outlet property="sharedItemPeople4" destination="Nj9-5b-G2b" id="Hxj-hb-vSj"/>
+                        <outlet property="sharedItemPeople5" destination="HSs-13-Txf" id="uwX-bK-73Y"/>
+                        <outlet property="sharedItemPeople6" destination="K1m-05-nPd" id="yMb-Vj-zzj"/>
+                        <outlet property="sharedItemPeople7" destination="f2K-Xj-EIl" id="cKK-1b-eQl"/>
+                        <outlet property="sharedItemPeople8" destination="dJj-wo-X9B" id="KFe-kT-UV6"/>
                         <outlet property="sharingYesorNo" destination="DQM-5I-fup" id="LwI-JK-vxn"/>
                         <outlet property="taxCostLabel" destination="AOc-OX-eA5" id="6yi-yp-Y2D"/>
                         <outlet property="taxCostTotal" destination="CrZ-LI-k8g" id="wic-rS-cpz"/>

@@ -23,12 +23,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     var oldSegmentedIndex : Int = 0
     var actualSegmentedIndex : Int = 0
+    var oldSegmentedSharedIndex : Int = 0
+    var actualSegmentedSharedIndex : Int = 0
 
     
     var textArray = [UITextField]()
     var labelArray = [UILabel]()
     var anotherLableArray = [UILabel]()
     var labelArrayToShow = [UILabel]()
+    
+    var sharedItemArray = [UILabel]()
+    var sharedItemAmount = [UITextField]()
+    var sharedItemPeople = [UITextField]()
     
     var newNumber = 0
     var currentIndex = 0
@@ -49,7 +55,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var itemsSharedQuestionLabel: UILabel!
     @IBOutlet weak var itemsSharedSegmentedControl: UISegmentedControl!
     
-    //Shared item # outlets
+    //Shared item # label outlets
     
     @IBOutlet weak var sharedItem1: UILabel!
     @IBOutlet weak var sharedItem2: UILabel!
@@ -59,6 +65,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sharedItem6: UILabel!
     @IBOutlet weak var sharedItem7: UILabel!
     @IBOutlet weak var sharedItem8: UILabel!
+    
+    //shared item amount Text Fields
     
     @IBOutlet weak var sharedItemAmount1: UITextField!
     
@@ -71,6 +79,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sharedItemAmount5: UITextField!
     
     @IBOutlet weak var sharedItemAmount6: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount7: UITextField!
+    
+    @IBOutlet weak var sharedItemAmount8: UITextField!
+    
+    //shared Item People
+    
+    @IBOutlet weak var sharedItemPeople1: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople2: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople3: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople4: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople5: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople6: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople7: UITextField!
+    
+    @IBOutlet weak var sharedItemPeople8: UITextField!
+    
+    
+    
     
     
     //Individual items
@@ -127,8 +160,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             itemsSharedQuestionLabel.hidden = false
             itemsSharedSegmentedControl.hidden = false
-            individualItemQuestion.hidden = true
-            segmentedControl.hidden = true
+            individualItemQuestion.hidden = false
+            segmentedControl.hidden = false
             
         case 1:
             
@@ -144,6 +177,49 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    //sharing quantity selection
+    
+    @IBAction func sharedSelection(sender: AnyObject) {
+        
+        
+        oldSegmentedSharedIndex = actualSegmentedSharedIndex
+        
+        actualSegmentedSharedIndex = itemsSharedSegmentedControl.selectedSegmentIndex
+        
+        
+        sharedItemArray = [sharedItem1, sharedItem2, sharedItem3,sharedItem4,sharedItem5,sharedItem6,sharedItem7,sharedItem8]
+        
+        
+        sharedItemAmount = [sharedItemAmount1,sharedItemAmount2,sharedItemAmount3,sharedItemAmount4,sharedItemAmount5,sharedItemAmount6,sharedItemAmount7,sharedItemAmount8]
+        
+        
+        sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
+        
+        if actualSegmentedSharedIndex >= oldSegmentedSharedIndex {
+            
+            for label in sharedItemArray[0...actualSegmentedSharedIndex] {
+                label.hidden = false
+            }
+            for text in sharedItemAmount[0...actualSegmentedSharedIndex] {
+                text.hidden = false
+            }
+            for shared in sharedItemPeople[0...actualSegmentedSharedIndex] {
+                shared.hidden = false
+            }
+        } else {
+            print("here")
+            for label in sharedItemArray[actualSegmentedSharedIndex+1...7] {
+                label.hidden = true
+            }
+            for text in sharedItemAmount[actualSegmentedSharedIndex+1...7] {
+                text.hidden = true
+            }
+            for shared in sharedItemPeople[actualSegmentedSharedIndex+1...7] {
+                shared.hidden = true
+            }
+        }
+        
+    }
     
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
@@ -238,11 +314,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func calculateTotal(sender: AnyObject) {
         
-        let taxPercent = Double(taxCostTotal.text!) ?? 0.0
+        //calculate shared
+        
+        let totalShared1 = (Double(sharedItemAmount1.text!) ?? 0.0)/(Double(sharedItemPeople1.text!) ?? 1.0)
+        let totalShared2 = (Double(sharedItemAmount2.text!) ?? 0.0)/(Double(sharedItemPeople2.text!) ?? 1.0)
+        let totalShared3 = (Double(sharedItemAmount3.text!) ?? 0.0)/(Double(sharedItemPeople3.text!) ?? 1.0)
+        let totalShared4 = (Double(sharedItemAmount4.text!) ?? 0.0)/(Double(sharedItemPeople4.text!) ?? 1.0)
+        let totalShared5 = (Double(sharedItemAmount5.text!) ?? 0.0)/(Double(sharedItemPeople5.text!) ?? 1.0)
+        let totalShared6 = (Double(sharedItemAmount6.text!) ?? 0.0)/(Double(sharedItemPeople6.text!) ?? 1.0)
+        let totalShared7 = (Double(sharedItemAmount7.text!) ?? 0.0)/(Double(sharedItemPeople7.text!) ?? 1.0)
+        let totalShared8 = (Double(sharedItemAmount8.text!) ?? 0.0)/(Double(sharedItemPeople8.text!) ?? 1.0)
+        
+        let totalShared = totalShared1 + totalShared2 + totalShared3 + totalShared4 + totalShared5 + totalShared6 + totalShared7 + totalShared8
+        
+        let taxTotal = Double(taxCostTotal.text!) ?? 0.0
         
         let total = Double(totalBill.text!) ?? 0.0
-        
-        let sharedTotal = totalShared ?? 0.0
         
         let amount1 = Double(item1.text!) ?? 0.0
         let amount2 = Double(item2.text!) ?? 0.0
@@ -253,7 +340,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let amount7 = Double(item7.text!) ?? 0.0
         let amount8 = Double(item8.text!) ?? 0.0
         
-        let sum = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8 + sharedTotal
+        let sum = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8 + totalShared
+        
+        let taxPercent = taxTotal/total
         
         let tax = total * taxPercent
         
@@ -438,6 +527,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         //totalShared = totalSharedSum
         
+        itemsSharedSegmentedControl.selectedSegmentIndex = -1
+        
         segueLabel.text = String(totalShared!)
         
         print(totalShared)
@@ -451,6 +542,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         itemsSharedQuestionLabel.hidden = true
         itemsSharedSegmentedControl.hidden = true
+        
+        sharedItemArray = [sharedItem1, sharedItem2, sharedItem3,sharedItem4,sharedItem5,sharedItem6,sharedItem7,sharedItem8]
+        
+        for label in sharedItemArray {
+            label.hidden = true
+        }
+        
+        sharedItemAmount = [sharedItemAmount1,sharedItemAmount2,sharedItemAmount3,sharedItemAmount4,sharedItemAmount5,sharedItemAmount6,sharedItemAmount7,sharedItemAmount8]
+        
+        for textField in sharedItemAmount {
+            textField.hidden = true
+        }
+        
+        sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
+        
+        for shared in sharedItemPeople {
+            shared.hidden = true
+        }
         
         item1.hidden = true
         item2.hidden = true
@@ -515,6 +624,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         for label in labelArray {
             label.hidden = true
         }
+        
         
         totalBill.text = ""
         whatsTotalLabel.hidden = true
