@@ -90,6 +90,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     //Individual items
     
+    
+    @IBOutlet weak var individualYesorNo: UILabel!
+    @IBOutlet weak var individualSegmented: UISegmentedControl!
+    
+    
     @IBOutlet weak var individualItemQuestion: UILabel!
     @IBOutlet weak var individualItemSegmentedControl: UISegmentedControl!
     
@@ -146,19 +151,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
         case 0:
             
+            print(itemsSharedSegmentedControl.selectedSegmentIndex)
+            print("case0")
+            
             itemsSharedQuestionLabel.hidden = false
             itemsSharedSegmentedControl.hidden = false
-            individualItemQuestion.hidden = false
-            segmentedControl.hidden = false
+            //individualItemQuestion.hidden = false
+            //segmentedControl.hidden = false
+            
+            itemsSharedSegmentedControl.selectedSegmentIndex = -1
             
         case 1:
+            
+            actualSegmentedSharedIndex = -1
+            itemsSharedSegmentedControl.selectedSegmentIndex = -1
+            
+            print(itemsSharedSegmentedControl.selectedSegmentIndex)
+            print("case1")
             
             individualItemQuestion.hidden = false
             segmentedControl.hidden = false
             itemsSharedQuestionLabel.hidden = true
             itemsSharedSegmentedControl.hidden = true
-            
-            itemsSharedSegmentedControl.selectedSegmentIndex = -1
             
             sharedItemArray = [sharedItem1, sharedItem2, sharedItem3,sharedItem4,sharedItem5,sharedItem6,sharedItem7,sharedItem8]
             
@@ -170,12 +184,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             for text in sharedItemAmount {
                 text.hidden = true
+                text.text = ""
             }
             
             sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
             
             for shared in sharedItemPeople {
                 shared.hidden = true
+                shared.text = ""
             }
 
             
@@ -217,22 +233,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 shared.hidden = false
             }
         } else {
-            print("here")
+            print(itemsSharedSegmentedControl.selectedSegmentIndex)
             for label in sharedItemArray[actualSegmentedSharedIndex+1...7] {
                 label.hidden = true
             }
             for text in sharedItemAmount[actualSegmentedSharedIndex+1...7] {
                 text.hidden = true
+                text.text = ""
             }
             for shared in sharedItemPeople[actualSegmentedSharedIndex+1...7] {
                 shared.hidden = true
+                shared.text = ""
             }
         }
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
 
+        print(itemsSharedSegmentedControl.selectedSegmentIndex)
         
+        sharedItemAmount = [sharedItemAmount1,sharedItemAmount2,sharedItemAmount3,sharedItemAmount4,sharedItemAmount5,sharedItemAmount6,sharedItemAmount7,sharedItemAmount8]
+        
+        for textField in sharedItemAmount {
+            if textField.text == "" {
+                textField.layer.borderWidth = 1
+                textField.layer.borderColor = UIColor.redColor().CGColor
+            }
+            
+        }
+        
+        sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
+        
+        for shared in sharedItemPeople {
+            if shared.text == "" {
+                shared.layer.borderWidth = 1
+                shared.layer.borderColor = UIColor.whiteColor().CGColor
+            }
+        }
         //USING A DICTIONARY
         
 //        currentIndex = prevIndex
@@ -311,9 +348,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             label.hidden = false
         }
         } else {
-            print("here")
+            print(itemsSharedSegmentedControl.selectedSegmentIndex)
             for text in textArray[actualSegmentedIndex+1...7] {
                 text.hidden = true
+                text.text = ""
             }
             for label in labelArray[actualSegmentedIndex+1...7] {
                 label.hidden = true
@@ -346,7 +384,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
-    
     
     
     @IBAction func calculateTotal(sender: AnyObject) {
@@ -431,9 +468,130 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         switch textField {
+        
+        case sharedItemAmount1:
+            sharedItemAmount1.resignFirstResponder()
+            sharedItemPeople1.becomeFirstResponder()
+        
+        case sharedItemPeople1:
+            sharedItemPeople1.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 0 {
+                sharedItemAmount2.becomeFirstResponder()
+            } else {
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
+            }
+            
+        case sharedItemAmount2:
+            sharedItemAmount2.resignFirstResponder()
+            sharedItemPeople2.becomeFirstResponder()
+            
+        case sharedItemPeople2:
+            sharedItemPeople2.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 1 {
+                sharedItemAmount3.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount3:
+            sharedItemAmount3.resignFirstResponder()
+            sharedItemPeople3.becomeFirstResponder()
+            
+        case sharedItemPeople3:
+            sharedItemPeople3.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 2 {
+                sharedItemAmount4.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount4:
+            sharedItemAmount4.resignFirstResponder()
+            sharedItemPeople4.becomeFirstResponder()
+            
+        case sharedItemPeople4:
+            sharedItemPeople4.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 3 {
+                sharedItemAmount5.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+        case sharedItemAmount3:
+            sharedItemAmount3.resignFirstResponder()
+            sharedItemPeople3.becomeFirstResponder()
+            
+        case sharedItemPeople3:
+            sharedItemPeople3.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 2 {
+                sharedItemAmount4.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount4:
+            sharedItemAmount4.resignFirstResponder()
+            sharedItemPeople4.becomeFirstResponder()
+            
+        case sharedItemPeople4:
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 3 {
+                sharedItemAmount5.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount5:
+            sharedItemAmount5.resignFirstResponder()
+            sharedItemPeople5.becomeFirstResponder()
+            
+        case sharedItemPeople5:
+            sharedItemPeople5.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 4 {
+                sharedItemAmount6.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount6:
+            sharedItemAmount6.resignFirstResponder()
+            sharedItemPeople6.becomeFirstResponder()
+            
+        case sharedItemPeople6:
+            sharedItemPeople6.resignFirstResponder()
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 5 {
+                sharedItemAmount7.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount7:
+            sharedItemAmount7.resignFirstResponder()
+            sharedItemPeople7.becomeFirstResponder()
+            
+        case sharedItemPeople7:
+            if itemsSharedSegmentedControl.selectedSegmentIndex > 6 {
+                sharedItemAmount8.becomeFirstResponder()
+            } else {
+                individualItemSegmentedControl.hidden = false
+                individualItemQuestion.hidden = false
+            }
+            
+        case sharedItemAmount8:
+            sharedItemAmount8.resignFirstResponder()
+            sharedItemPeople8.becomeFirstResponder()
+        
+        case sharedItemPeople8:
+            individualItemSegmentedControl.hidden = false
+            individualItemQuestion.hidden = false
+        
         case item1:
-            
-            
             item1.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 0 {
                 item2.becomeFirstResponder()
@@ -584,10 +742,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         //totalShared = totalSharedSum
         
+        individualYesorNo.hidden = true
+        individualSegmented.hidden = true
+        individualSegmented.selectedSegmentIndex = -1
+        
         itemsSharedSegmentedControl.selectedSegmentIndex = -1
         
-        tipQuestion.hidden = true
-        tipSelection.hidden = true
+        tipQuestion.hidden = false
+        tipSelection.hidden = false
         
         //segueLabel.text = String(totalShared!)
         
@@ -613,12 +775,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         for textField in sharedItemAmount {
             textField.hidden = true
+            textField.delegate = self
         }
         
         sharedItemPeople = [sharedItemPeople1,sharedItemPeople2,sharedItemPeople3,sharedItemPeople4,sharedItemPeople5,sharedItemPeople6,sharedItemPeople7,sharedItemPeople8]
         
         for shared in sharedItemPeople {
             shared.hidden = true
+            shared.delegate = self
         }
         
         item1.hidden = true
@@ -657,6 +821,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         taxCostTotal.hidden = true
         
         sharedItemAmount1.delegate = self
+        sharedItemPeople1.delegate = self
         
         taxCostTotal.delegate = self
         
