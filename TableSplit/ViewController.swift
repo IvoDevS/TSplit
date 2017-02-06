@@ -169,8 +169,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print(itemsSharedSegmentedControl.selectedSegmentIndex)
             print("case1")
             
-            individualItemQuestion.hidden = false
-            segmentedControl.hidden = false
+            
+            individualYesorNo.hidden = false
+            individualSegmented.hidden = false
+            //individualItemQuestion.hidden = false
+            //segmentedControl.hidden = false
             itemsSharedQuestionLabel.hidden = true
             itemsSharedSegmentedControl.hidden = true
             
@@ -247,6 +250,45 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    @IBAction func individualOrderSegmentedControl(sender: AnyObject) {
+        
+        switch individualSegmented.selectedSegmentIndex {
+            
+        case 0:
+            
+            individualItemQuestion.hidden = false
+            individualItemSegmentedControl.hidden = false
+            
+        case 1:
+            
+            actualSegmentedIndex = -1
+            
+            individualItemQuestion.hidden = true
+            individualItemSegmentedControl.hidden = true
+            
+            segmentedControl.selectedSegmentIndex = -1
+            
+            textArray = [item1,item2,item3,item4,item5,item6,item7,item8]
+            
+            labelArray = [item1Label, item2Label, item3Label, item4Label, item5Label, item6Label, item7Label, item8Label]
+            
+            for text in textArray {
+                text.hidden = true
+                text.text = ""
+            }
+            
+            for label in labelArray {
+                label.hidden = true
+            }
+            
+        default:
+            break
+        }
+        
+        
+    }
+    
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
 
@@ -491,8 +533,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 1 {
                 sharedItemAmount3.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount3:
@@ -504,8 +546,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 2 {
                 sharedItemAmount4.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount4:
@@ -517,8 +559,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 3 {
                 sharedItemAmount5.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
         case sharedItemAmount3:
             sharedItemAmount3.resignFirstResponder()
@@ -529,8 +571,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 2 {
                 sharedItemAmount4.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount4:
@@ -541,8 +583,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 3 {
                 sharedItemAmount5.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount5:
@@ -554,8 +596,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 4 {
                 sharedItemAmount6.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount6:
@@ -567,8 +609,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 5 {
                 sharedItemAmount7.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount7:
@@ -579,8 +621,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if itemsSharedSegmentedControl.selectedSegmentIndex > 6 {
                 sharedItemAmount8.becomeFirstResponder()
             } else {
-                individualItemSegmentedControl.hidden = false
-                individualItemQuestion.hidden = false
+                individualYesorNo.hidden = false
+                individualSegmented.hidden = false
             }
             
         case sharedItemAmount8:
@@ -588,8 +630,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             sharedItemPeople8.becomeFirstResponder()
         
         case sharedItemPeople8:
-            individualItemSegmentedControl.hidden = false
-            individualItemQuestion.hidden = false
+            individualYesorNo.hidden = false
+            individualSegmented.hidden = false
         
         case item1:
             item1.resignFirstResponder()
@@ -748,8 +790,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         itemsSharedSegmentedControl.selectedSegmentIndex = -1
         
-        tipQuestion.hidden = false
-        tipSelection.hidden = false
+        tipQuestion.hidden = true
+        tipSelection.hidden = true
         
         //segueLabel.text = String(totalShared!)
         
@@ -853,7 +895,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         for label in labelArray {
             label.hidden = true
         }
-        
         
         totalBill.text = ""
         whatsTotalLabel.hidden = true

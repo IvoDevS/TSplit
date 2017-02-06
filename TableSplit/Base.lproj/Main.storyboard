@@ -684,6 +684,9 @@
                                                     <segment title="Yes"/>
                                                     <segment title="No"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="individualOrderSegmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="ydY-dB-4Sz"/>
+                                                </connections>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="How many items did you have?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUO-gO-EcU">
                                                 <rect key="frame" x="39" y="470" width="312" height="25"/>
