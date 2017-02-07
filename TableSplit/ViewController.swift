@@ -14,7 +14,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    var totalShared : Double?
+    var totalShared: Double = 0.0
+    var individual: Double = 0.0
+    var sum: Double = 0.0
+    var taxOwed: Double = 0.0
+    var tipOwed: Double = 0.0
+    var grandTotalOwed: Double = 0.0
 
     @IBOutlet weak var segueLabel: UILabel!
     @IBOutlet weak var grandTotalLabel: UILabel!
@@ -441,7 +446,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let totalShared7 = (Double(sharedItemAmount7.text!) ?? 0.0)/(Double(sharedItemPeople7.text!) ?? 1.0)
         let totalShared8 = (Double(sharedItemAmount8.text!) ?? 0.0)/(Double(sharedItemPeople8.text!) ?? 1.0)
         
-        let totalShared = totalShared1 + totalShared2 + totalShared3 + totalShared4 + totalShared5 + totalShared6 + totalShared7 + totalShared8
+        totalShared = totalShared1 + totalShared2 + totalShared3 + totalShared4 + totalShared5 + totalShared6 + totalShared7 + totalShared8
         
         let total = Double(totalBill.text!) ?? 0.0
         
@@ -454,7 +459,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let amount7 = Double(item7.text!) ?? 0.0
         let amount8 = Double(item8.text!) ?? 0.0
         
-        let sum = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8 + totalShared
+        individual = amount1 + amount2 + amount3 + amount4 + amount5 + amount6 + amount7 + amount8
+        
+        sum = individual + totalShared
         
         //calculate Tax
         
@@ -464,15 +471,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         let tax = total * taxPercent
         
-        let tip = total * 0.20
+        let tip = total * tipPercent
         
         let percentOfTotal = sum/total
         
-        let taxOwed = tax * percentOfTotal
+        taxOwed = tax * percentOfTotal
         
-        let tipOwed = tip * percentOfTotal
+        tipOwed = tip * percentOfTotal
         
-        let grandTotalOwed = sum + taxOwed + tipOwed
+        grandTotalOwed = sum + taxOwed + tipOwed
         
         totalTaxResultLabel.text = "$ " + "\(String(format:"%.2f", tax))"
         yourTaxDueResultLabel.text = "$ " + "\(String(format: "%.2f",taxOwed))"
@@ -916,6 +923,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         segmentedControl.selectedSegmentIndex = -1
         
         isPressed = false
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var displayScene = segue.destinationViewController as! DisplayViewController
+    
+        displayScene.shared = totalShared
+        
     }
 
 
