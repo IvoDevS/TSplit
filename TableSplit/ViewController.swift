@@ -480,13 +480,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         tipOwed = tip * percentOfTotal
         
         grandTotalOwed = sum + taxOwed + tipOwed
-        
+
+        /*
         totalTaxResultLabel.text = "$ " + "\(String(format:"%.2f", tax))"
         yourTaxDueResultLabel.text = "$ " + "\(String(format: "%.2f",taxOwed))"
         totalTipResultLabel.text = "$ " + "\(String(format: "%.2f", tip))"
         yourDueResultLabel.text = "$ " + "\(String(format: "%.2f", tipOwed))"
         grandTotalLabel.text = "$ " + "\(String(format: "%.2f",grandTotalOwed))"
+        */
         
+        /*
         grandTotalLabel.hidden = false
         totalTaxLabel.hidden = false
         totalTaxResultLabel.hidden = false
@@ -496,19 +499,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
         yourTaxDueResultLabel.hidden = false
         totalTipResultLabel.hidden = false
         yourTaxDueLabel.hidden = false
-        
+        */
+ 
+        /*
         grandTotalLabel.layer.borderWidth = 2.0
         grandTotalLabel.layer.cornerRadius = 8
         grandTotalLabel.layer.borderColor = UIColor.whiteColor().CGColor
+        */
         
-        newEntryButtonOutlet.hidden = false
+        //newEntryButtonOutlet.hidden = false
         
+        /*
         if isPressed == false {
         UIView.animateWithDuration(3) { () -> Void in
             self.newEntryButtonOutlet.center = CGPointMake(self.newEntryButtonOutlet.center.x, self.newEntryButtonOutlet.center.y - 500)
             self.isPressed = true
             }
         }
+        */
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -767,15 +775,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         toolbar.translucent = true
         
         
-        if textField == totalBill  {
-            let item = UIBarButtonItem(title: "Pee", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
+        if textField == taxCostTotal  {
+            let item = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
             let toolbarButtons = [item]
             toolbar.setItems(toolbarButtons, animated: true)
             textField.inputAccessoryView = toolbar
             
         } else {
             
-        let item = UIBarButtonItem(title: "Poop", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
+        let item = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
             let toolbarButtons = [item]
             toolbar.setItems(toolbarButtons, animated: true)
             textField.inputAccessoryView = toolbar
@@ -790,6 +798,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         //totalShared = totalSharedSum
+        
+        
         
         individualYesorNo.hidden = true
         individualSegmented.hidden = true
@@ -855,16 +865,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         whatsTotalLabel.hidden = true
         totalBill.hidden = true
         howMuchButton.hidden = true
-        totalTaxLabel.hidden = true
-        totalTipLabel.hidden = true
-        yourDueLabel.hidden = true
-        yourDueResultLabel.hidden = true
-        yourTaxDueResultLabel.hidden = true
-        totalTipLabel.hidden = true
-        totalTipResultLabel.hidden = true
-        totalTaxResultLabel.hidden = true
-        yourTaxDueLabel.hidden = true
-        grandTotalLabel.hidden = true
+        //totalTaxLabel.hidden = true
+        //totalTipLabel.hidden = true
+        //yourDueLabel.hidden = true
+        //yourDueResultLabel.hidden = true
+        //yourTaxDueResultLabel.hidden = true
+        //totalTipLabel.hidden = true
+        //totalTipResultLabel.hidden = true
+        //totalTaxResultLabel.hidden = true
+        //yourTaxDueLabel.hidden = true
+        //grandTotalLabel.hidden = true
         
         taxCostLabel.hidden = true
         taxCostTotal.hidden = true
@@ -885,11 +895,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         totalBill.delegate = self
         
-        newEntryButtonOutlet.hidden = true
+        //newEntryButtonOutlet.hidden = true
         
-       newEntryButtonOutlet.center = CGPointMake(newEntryButtonOutlet.center.x, newEntryButtonOutlet.center.y + 500)
+       //newEntryButtonOutlet.center = CGPointMake(newEntryButtonOutlet.center.x, newEntryButtonOutlet.center.y + 500)
     }
 
+    /*
     @IBAction func newEntryButton(sender: AnyObject) {
         
         textArray = [item1,item2,item3,item4,item5,item6,item7,item8]
@@ -924,12 +935,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         isPressed = false
     }
+    */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         var displayScene = segue.destinationViewController as! DisplayViewController
     
         displayScene.shared = totalShared
+        displayScene.individual = individual
+        displayScene.tax = taxOwed
+        displayScene.tip = tipOwed
+        displayScene.grandTotal = grandTotalOwed
+        
         
     }
 
