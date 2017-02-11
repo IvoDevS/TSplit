@@ -14,12 +14,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
+    var passKey: Bool = false
+    var totalBillKey: Bool = false
+    var taxKey: Bool = false
+    
     var totalShared: Double = 0.0
     var individual: Double = 0.0
     var sum: Double = 0.0
     var taxOwed: Double = 0.0
     var tipOwed: Double = 0.0
     var grandTotalOwed: Double = 0.0
+    var total: Double = 0.0
+    var taxTotal: Double = 0.0
+    
+    //from pass segue
+    
+    var totalFromPass: Double = 0.0
+    var taxFromPass: Double = 0.0
 
     @IBOutlet weak var segueLabel: UILabel!
     @IBOutlet weak var grandTotalLabel: UILabel!
@@ -50,6 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var lastNum = 0
     
     var isPressed = false
+    
     
     //Outlets
     
@@ -149,6 +161,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //other labels and textfieds to hide
     
     @IBOutlet weak var totalBill: UITextField!
+    
+    var isTotalBillHidden = true
     
     @IBAction func sharingQuestionSegmentedControl(sender: AnyObject) {
     
@@ -271,6 +285,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             individualItemQuestion.hidden = true
             individualItemSegmentedControl.hidden = true
+            
+            whatsTotalLabel.hidden = false
+            totalBill.hidden = false
+            
+            if passKey == false {
+                totalBill.becomeFirstResponder()
+            }
             
             segmentedControl.selectedSegmentIndex = -1
             
@@ -448,7 +469,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         totalShared = totalShared1 + totalShared2 + totalShared3 + totalShared4 + totalShared5 + totalShared6 + totalShared7 + totalShared8
         
-        let total = Double(totalBill.text!) ?? 0.0
+        if passKey == true {
+            total = totalFromPass
+        } else {
+            total = Double(totalBill.text!) ?? 0.0
+        }
         
         let amount1 = Double(item1.text!) ?? 0.0
         let amount2 = Double(item2.text!) ?? 0.0
@@ -465,7 +490,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         //calculate Tax
         
-        let taxTotal = Double(taxCostTotal.text!) ?? 0.0
+        if passKey == true {
+            taxTotal = taxFromPass
+        } else {
+            taxTotal = Double(taxCostTotal.text!) ?? 0.0
+        }
         
         let taxPercent = taxTotal/total
         
@@ -517,6 +546,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
         */
+        
+        self.view.endEditing(true)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -652,6 +683,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             item1.resignFirstResponder()
             if segmentedControl.selectedSegmentIndex > 0 {
                 item2.becomeFirstResponder()
+            } else if passKey == true {
+                item1.resignFirstResponder()
             } else {
             totalBill.becomeFirstResponder()
             whatsTotalLabel.hidden = false
@@ -774,6 +807,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         toolbar.sizeToFit()
         toolbar.translucent = true
         
+        if taxKey == true {
+            if textField == taxCostTotal {
+                taxCostTotal.text = ""
+                taxKey = false
+            }
+        }
+        if totalBillKey == true {
+            if textField == totalBill {
+                totalBill.text = ""
+                totalBillKey = false
+            }
+        }
+        
         
         if textField == taxCostTotal  {
             let item = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: Selector("endEditingNow"))
@@ -797,8 +843,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+        print("view did loading")
         //totalShared = totalSharedSum
         
+        if isTotalBillHidden == false {
+            // if this thing is to be hidden then hide
+            self.totalBill.hidden = true
+        }
         
         
         individualYesorNo.hidden = true
@@ -936,6 +988,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
         isPressed = false
     }
     */
+   
+    /*
+    override func viewWillAppear(animated: Bool) {
+        item1.hidden = true
+        
+    }
+ */
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        print("view will appearing")
+        
+        if passKey == true {
+            
+            whatsTotalLabel.hidden = false
+            totalBill.hidden = false
+            taxCostLabel.hidden = false
+            taxCostTotal.hidden = false
+            tipQuestion.hidden = false
+            tipSelection.hidden = false
+            howMuchButton.hidden = false
+            
+            totalBill.text = "$ " + "\(String(format:"%.2f", totalFromPass))"
+            taxCostTotal.text = "$ " + "\(String(format:"%.2f", taxFromPass))"
+            
+        }
+        
+       /* if isTotalBillHidden == false {
+            // if this thing is to be hidden then hide
+            self.totalBill.hidden = true
+        }
+
+        */
+        
+    }
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -946,7 +1034,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         displayScene.tax = taxOwed
         displayScene.tip = tipOwed
         displayScene.grandTotal = grandTotalOwed
+        displayScene.totalBillCharged = Double(totalBill.text!) ?? 0.0
+        displayScene.taxCharged = Double(taxCostTotal.text!) ?? 0.0
         
+        if totalBillKey == true {
+            displayScene.totalBillCharged = totalFromPass
+        }
+        if taxKey == true {
+            displayScene.taxCharged = taxFromPass
+        }
         
     }
 

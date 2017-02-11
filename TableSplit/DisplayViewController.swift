@@ -12,11 +12,18 @@ class DisplayViewController: UIViewController {
     
     //helper variables
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     var shared: Double = 0.0
     var individual: Double = 0.0
     var tax: Double = 0.0
     var tip: Double = 0.0
     var grandTotal: Double = 0.0
+    
+    var totalBillCharged: Double = 0.0
+    var taxCharged: Double = 0.0
     
     var key: Bool = true
     
@@ -86,7 +93,6 @@ class DisplayViewController: UIViewController {
         print(tip)
         print(grandTotal)
         
-        
 
         // Do any additional setup after loading the view.
         
@@ -101,15 +107,26 @@ class DisplayViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         var mainScene = segue.destinationViewController as! ViewController
         
         if segue.identifier == "pass" {
-            print("We in this bithc")
-            //mainScene.totalBill!.hidden = false
+            print("We in this bitch")
+            
+            mainScene.passKey = true
+            mainScene.totalBillKey = true
+            mainScene.taxKey = true
+            mainScene.totalFromPass = totalBillCharged
+            mainScene.taxFromPass = taxCharged
+            
+            print(totalBillCharged)
+            print(taxCharged)
+        
+            //mainScene.totalBill.hidden = false
+        } else if segue.identifier == "" {
+            
         }
         
         
