@@ -12,7 +12,7 @@ class DisplayViewController: UIViewController {
     
     //helper variables
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -45,27 +45,27 @@ class DisplayViewController: UIViewController {
     
     @IBOutlet weak var infoButton: UIButton!
     
-    @IBAction func infoButtonAction(sender: AnyObject) {
+    @IBAction func infoButtonAction(_ sender: AnyObject) {
 
         if key == false {
-            sharedTotalResult.hidden = false
-            sharedTotalLabel.hidden = false
-            individualTotalLabel.hidden = false
-            individualTotalResult.hidden = false
-            taxLabel.hidden = false
-            taxResult.hidden = false
-            tipLabel.hidden = false
-            tipResult.hidden = false
+            sharedTotalResult.isHidden = false
+            sharedTotalLabel.isHidden = false
+            individualTotalLabel.isHidden = false
+            individualTotalResult.isHidden = false
+            taxLabel.isHidden = false
+            taxResult.isHidden = false
+            tipLabel.isHidden = false
+            tipResult.isHidden = false
             key = true
         } else  {
-            sharedTotalResult.hidden = true
-            sharedTotalLabel.hidden = true
-            individualTotalLabel.hidden = true
-            individualTotalResult.hidden = true
-            taxLabel.hidden = true
-            taxResult.hidden = true
-            tipLabel.hidden = true
-            tipResult.hidden = true
+            sharedTotalResult.isHidden = true
+            sharedTotalLabel.isHidden = true
+            individualTotalLabel.isHidden = true
+            individualTotalResult.isHidden = true
+            taxLabel.isHidden = true
+            taxResult.isHidden = true
+            tipLabel.isHidden = true
+            tipResult.isHidden = true
             key = false
 
         }
@@ -78,14 +78,14 @@ class DisplayViewController: UIViewController {
         
         key = false
         
-        sharedTotalResult.hidden = true
-        sharedTotalLabel.hidden = true
-        individualTotalLabel.hidden = true
-        individualTotalResult.hidden = true
-        taxLabel.hidden = true
-        taxResult.hidden = true
-        tipLabel.hidden = true
-        tipResult.hidden = true
+        sharedTotalResult.isHidden = true
+        sharedTotalLabel.isHidden = true
+        individualTotalLabel.isHidden = true
+        individualTotalResult.isHidden = true
+        taxLabel.isHidden = true
+        taxResult.isHidden = true
+        tipLabel.isHidden = true
+        tipResult.isHidden = true
         
         print(shared)
         print(individual)
@@ -108,9 +108,9 @@ class DisplayViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        var mainScene = segue.destinationViewController as! ViewController
+        let mainScene = segue.destination as! ViewController
         
         if segue.identifier == "pass" {
             print("We in this bitch")

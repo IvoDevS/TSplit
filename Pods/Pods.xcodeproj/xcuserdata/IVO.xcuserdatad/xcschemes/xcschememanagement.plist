@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-TableSplit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>7CF999D94F78A934B66C1ED1D900E1E1</key>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AB1682531CF7A9F2977E3DC6889604CA</key>
+		<key>DCFCD9989A6C66457207333499BA214D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

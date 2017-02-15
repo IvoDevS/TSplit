@@ -71,15 +71,15 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
     
 //Action : Yes or No Shared Items
     
-    @IBAction func sharersItemsYesorNo(sender: AnyObject) {
+    @IBAction func sharersItemsYesorNo(_ sender: AnyObject) {
         switch sharedItemsSegmentedControl.selectedSegmentIndex {
             
         case 0 :
-            numberOfItemsShared.hidden = false
-            itemsQuestion.hidden = false
+            numberOfItemsShared.isHidden = false
+            itemsQuestion.isHidden = false
         
         case 1 :
-            performSegueWithIdentifier("nextScreen", sender: self)
+            performSegue(withIdentifier: "nextScreen", sender: self)
             
         default :
             break;
@@ -90,7 +90,7 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var numberOfItemsShared: UISegmentedControl!
     
-    @IBAction func numberOfItemsSelegmentedControl(sender: AnyObject) {
+    @IBAction func numberOfItemsSelegmentedControl(_ sender: AnyObject) {
         
         //setting-up Arrays
     
@@ -109,33 +109,33 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
         if actualSegmentedIndex >= oldSegmentedIndex {
         
         for item in itemArray[0...actualSegmentedIndex] {
-            item.hidden = false
+            item.isHidden = false
         }
         
         for itemAmount in itemAmountArray[0...actualSegmentedIndex] {
-            itemAmount.hidden = false
+            itemAmount.isHidden = false
         }
         
         for itemShared in itemSharedArray[0...actualSegmentedIndex] {
-            itemShared.hidden = false
+            itemShared.isHidden = false
         }
         } else {
             
             for item in itemArray[actualSegmentedIndex+1...7] {
-                    item.hidden = true
+                    item.isHidden = true
                 }
             for itemAmount in itemAmountArray[actualSegmentedIndex+1...7] {
-                    itemAmount.hidden = true
+                    itemAmount.isHidden = true
                 }
             for itemShared in itemSharedArray[actualSegmentedIndex+1...7] {
-                    itemShared.hidden = true
+                    itemShared.isHidden = true
             }
         }
 }
     
     // Done button + calculating functionality
     
-    @IBAction func doneButtonAction(sender: AnyObject) {
+    @IBAction func doneButtonAction(_ sender: AnyObject) {
         
         let total1 = (Double(itemAmount1.text!) ?? 0.0)/(Double(itemShared1.text!) ?? 1.0)
         
@@ -159,7 +159,7 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
         
         totalLabel.text = String(totalSum)
         
-        performSegueWithIdentifier("nextScreen", sender: self)
+        performSegue(withIdentifier: "nextScreen", sender: self)
         
     }
     
@@ -181,15 +181,15 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
         //hide labels and text fields
         
         for item in itemArray {
-            item.hidden = true
+            item.isHidden = true
         }
         
         for itemAmount in itemAmountArray {
-            itemAmount.hidden = true
+            itemAmount.isHidden = true
         }
         
         for itemShared in itemSharedArray {
-            itemShared.hidden = true
+            itemShared.isHidden = true
         }
         
         numberOfItemsShared.selectedSegmentIndex = -1
@@ -197,9 +197,9 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
         
         sharedItemsSegmentedControl.selectedSegmentIndex = -1
         
-        itemsQuestion.hidden = true
+        itemsQuestion.isHidden = true
         
-        numberOfItemsShared.hidden = true
+        numberOfItemsShared.isHidden = true
 
         // Do any additional setup after loading the view.
     }
@@ -209,9 +209,9 @@ class SharedItemsViewController: UIViewController, UITextFieldDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        var secondScene = segue.destinationViewController as! ViewController
+        let secondScene = segue.destination as! ViewController
         
         secondScene.totalShared = totalSum
         
